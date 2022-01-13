@@ -24,6 +24,7 @@ import type {
   MovieVideoType,
   PersonType,
   CompanyType,
+  MovieCreditsType,
 } from './types';
 
 type QueryType = {
