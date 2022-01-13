@@ -87,7 +87,9 @@
     "generate-types": "babel-node ./src/bin/generate-types.js",
     "lint": "eslint ./src ./test && flow",
     "lint:fix": "eslint ./src ./test --fix && flow",
-    "test": "NODE_ENV=test ava --serial --verbose"
+    "test": "NODE_ENV=test ava --serial --verbose",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
   "version": "2.7.0"
 }
