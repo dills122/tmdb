@@ -159,6 +159,14 @@ class Tmdb {
     return person;
   }
 
+  async getPersonMovieCredits (personId: number): Promise<MovieCreditsType> {
+    const movieCredits = await this.get('person/' + personId + '/movie_credits', {
+      language: this.language,
+    });
+
+    return movieCredits;
+  }
+
   async getCompany (companyId: number): Promise<CompanyType> {
     const company = await this.get('company/' + companyId, {
       language: this.language,
