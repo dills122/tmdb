@@ -45,6 +45,7 @@ async getMovieCrewCredits (movieId: number) => Promise<$ReadOnlyArray<MovieCrewC
 async getMoviePosterImages (movieId: number, includeImageLanguage: $ReadOnlyArray<string>) => Promise<$ReadOnlyArray<MoviePosterImageType>>;
 async getMovieVideos (movieId: number) => Promise<$ReadOnlyArray<MovieVideoType>>;
 async getPerson (personId: number) => Promise<PersonType>;
+async getPersonMovieCredits (personId: number) => Promise<MovieCreditsType>;
 
 ```
 

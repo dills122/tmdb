@@ -127,3 +127,34 @@ export type CompanyType = {|
   +originCountry: string,
   +parentCompany: null | CompanyType,
 |};
+
+export type CastType = {|
+  +character: string,
+  +creditId: string,
+  +releaseDate: string,
+  +id: number,
+  +name: string,
+  +title: string,
+  +overview: string,
+  +posterPath: string,
+  +popularity: number,
+  +voteAverage: number,
+|};
+
+export type CrewType = {|
+  +department: string,
+  +creditId: string,
+  +releaseDate: string,
+  +id: number,
+  +name: string,
+  +title: string,
+  +overview: string,
+  +posterPath: string,
+  +popularity: number,
+  +voteAverage: number,
+|};
+
+export type MovieCreditsType = {|
+  +cast: $ReadOnlyArray<CastType>,
+  +crew: $ReadOnlyArray<CrewType>,
+|};
