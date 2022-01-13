@@ -1,11 +1,5 @@
 # TMDb
-
-[![GitSpo Mentions](https://gitspo.com/badges/mentions/gajus/tmdb?style=flat-square)](https://gitspo.com/mentions/gajus/tmdb)
-[![Travis build status](http://img.shields.io/travis/gajus/tmdb/master.svg?style=flat-square)](https://travis-ci.org/gajus/tmdb)
-[![Coveralls](https://img.shields.io/coveralls/gajus/tmdb.svg?style=flat-square)](https://coveralls.io/github/gajus/tmdb)
-[![NPM version](http://img.shields.io/npm/v/tmdb.svg?style=flat-square)](https://www.npmjs.org/package/tmdb)
-[![Canonical Code Style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat-square)](https://github.com/gajus/canonical)
-[![Twitter Follow](https://img.shields.io/twitter/follow/kuizinas.svg?style=social&label=Follow)](https://twitter.com/kuizinas)
+[![NPM version](https://img.shields.io/npm/v/@dills1220/tmdb.svg?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
 
 [The Movie Database](https://www.themoviedb.org/) (TMDb) SDK.
 
