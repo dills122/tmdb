@@ -22,7 +22,6 @@
     ]
   },
   "dependencies": {
-    "@babel/register": "^7.7.4",
     "bluefeather": "^2.9.0",
     "deep-map-keys": "^2.0.1",
     "es6-error": "^4.1.1",
@@ -88,7 +87,9 @@
     "generate-types": "babel-node ./src/bin/generate-types.js",
     "lint": "eslint ./src ./test && flow",
     "lint:fix": "eslint ./src ./test --fix && flow",
-    "test": "NODE_ENV=test ava --serial --verbose"
+    "test": "NODE_ENV=test ava --serial --verbose",
+    "prepublishOnly": "npm run build",
+    "prepare": "husky install"
   },
-  "version": "2.7.0"
+  "version": "2.7.1"
 }
