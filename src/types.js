@@ -55,10 +55,7 @@ export type MovieType = {|
   +backdropPath: ImagePathType,
   +belongsToCollection: null | Object,
   +budget: number,
-  +genres: $ReadOnlyArray<{|
-    +id: number,
-    +name: string,
-  |}>,
+  +genres: $ReadOnlyArray<string>,
   +homepage: string | null,
   +id: number,
   +imdbId: string | null,
