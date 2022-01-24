@@ -99,8 +99,13 @@ class Tmdb {
       language: this.language,
     });
 
+    const genres = movie.genres.map((genre) => {
+      return genre.name;
+    });
+
     return {
       ...movie,
+      genres,
 
       // Revenue can be 0, e.g. https://gist.github.com/gajus/b396a7e1af22977b0d98f4c63a664d44#file-response-json-L94
       revenue: movie.revenue || null,

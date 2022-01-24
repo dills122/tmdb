@@ -13,6 +13,13 @@ test('retrieves movie resource', async (t) => {
     .reply(
       200,
       {
+        genres: [{
+          id: 1,
+          name: 'action',
+        }, {
+          id: 2,
+          name: 'adventure',
+        }],
         id: 1,
         imdb_id: 'tt1',
       },
@@ -26,4 +33,7 @@ test('retrieves movie resource', async (t) => {
   t.true(scope.isDone());
   t.true(movie.id === 1);
   t.true(movie.imdbId === 'tt1');
+  t.true(movie.genres.length === 2);
+  const genreOne = movie.genres[0];
+  t.true(genreOne === 'action');
 });
