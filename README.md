@@ -1,92 +1,126 @@
 # TMDb
-[![NPM version](https://img.shields.io/npm/v/@dills1220/tmdb.svg?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
 
-[The Movie Database](https://www.themoviedb.org/) (TMDb) SDK.
+[![npm version](https://img.shields.io/npm/v/@dills1220/tmdb.svg?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
 
-## Features
+A small, typed Node.js SDK for [The Movie Database](https://www.themoviedb.org/) (TMDb) v3 API.
 
-- Automatic rate-throttling
-- Strict types
+## Requirements
+
+- Node.js 22.13 or newer
+- A TMDb v3 API key
+
+## Install
+
+```sh
+npm install @dills1220/tmdb
+```
 
 ## Usage
 
-```js
-import { Tmdb } from "@dills1220/tmdb";
+```ts
+import {
+  Tmdb,
+} from '@dills1220/tmdb';
 
-/**
- * @see https://developers.themoviedb.org/3/getting-started/authentication
- */
-const apiKey: string = "";
+const tmdb = new Tmdb(process.env.TMDB_API_KEY ?? '');
+const movie = await tmdb.getMovie(218);
 
-const tmdb = new Tmdb(apiKey);
+console.log(movie.title);
 ```
 
-### API
+The optional second constructor argument selects the response language and defaults to `en`:
 
-Refer to the [source code](./src/Tmdb.js) and the [type definitions](./src/types.js).
-
-> Note: Only a subset of the API is implemented. I will be adding new methods as needed.
-> If you need a method added, raise a PR. Alternatively, you can use the low-level [`get`](#get)
-> method to construct any API calls.
-
-```js
-async findId (resourceType: 'movie' | 'person', externalSource: 'imdb', externalId: string) => Promise<number>;
-async get (resource: string, parameters: QueryType = {}) => Object;
-async getMovie (movieId: number) => Promise<MovieType>
-async getMovieBackdropImages (movieId: number, includeImageLanguage: $ReadOnlyArray<string>) => Promise<$ReadOnlyArray<MovieBackdropImageType>>;
-async getMovieCastCredits (movieId: number) => Promise<$ReadOnlyArray<MovieCastCreditType>>;
-async getMovieCrewCredits (movieId: number) => Promise<$ReadOnlyArray<MovieCrewCreditType>>;
-async getMoviePosterImages (movieId: number, includeImageLanguage: $ReadOnlyArray<string>) => Promise<$ReadOnlyArray<MoviePosterImageType>>;
-async getMovieVideos (movieId: number) => Promise<$ReadOnlyArray<MovieVideoType>>;
-async getPerson (personId: number) => Promise<PersonType>;
-async getPersonMovieCredits (personId: number) => Promise<MovieCreditsType>;
-
+```ts
+const tmdb = new Tmdb(process.env.TMDB_API_KEY ?? '', 'fr');
 ```
 
-#### `get`
+The SDK continues to use TMDb v3's supported `api_key` query authentication. Keep API keys out of
+source control and logs.
 
-`get` method is the most primitive TMDb API method and it can be used to construct any of the API queries.
+## API
 
-Example: `GET /search/movie` API method is not implemented. However, you can still use it as:
+```ts
+findId(
+  resourceType: 'movie' | 'person',
+  externalSource: 'imdb',
+  externalId: string,
+): Promise<number>;
 
-```js
-await tmdb.get("search/movie", {
-  query: "The Terminator",
+get<T = Record<string, unknown>>(
+  resource: string,
+  parameters?: Readonly<Record<string, string | number | null>>,
+): Promise<T>;
+
+getCompany(companyId: number): Promise<CompanyType>;
+getMovie(movieId: number): Promise<MovieType>;
+getMovieBackdropImages(
+  movieId: number,
+  includeImageLanguage?: readonly string[] | null,
+): Promise<readonly MovieBackdropImageType[]>;
+getMovieCastCredits(movieId: number): Promise<readonly MovieCastCreditType[]>;
+getMovieCrewCredits(movieId: number): Promise<readonly MovieCrewCreditType[]>;
+getMoviePosterImages(
+  movieId: number,
+  includeImageLanguage?: readonly string[] | null,
+): Promise<readonly MoviePosterImageType[]>;
+getMovieVideos(movieId: number): Promise<readonly MovieVideoType[]>;
+getPerson(personId: number): Promise<PersonType>;
+getPersonMovieCredits(personId: number): Promise<MovieCreditsType>;
+```
+
+The low-level `get()` method supports TMDb endpoints that do not yet have a dedicated SDK method.
+Response keys are converted recursively from snake case to camel case:
+
+```ts
+const result = await tmdb.get<{
+  readonly results: readonly {
+    readonly id: number;
+    readonly originalTitle: string;
+  }[];
+}>('search/movie', {
+  query: 'The Terminator',
 });
 ```
 
-### Handling errors
+## Errors and rate limits
 
-Methods that are expected to return a specific resource will throw `NotFoundError` if the resource is not found.
+Resource lookups throw `NotFoundError` for HTTP 404 responses. Other TMDb failures throw
+`RemoteError`, which exposes TMDb's numeric error code as `error.code`.
 
-```js
+```ts
 import {
+  NotFoundError,
   Tmdb,
-  NotFoundError
-} from "@dills1220/tmdb";
+} from '@dills1220/tmdb';
 
-const tmdb = new Tmdb([..]);
+const tmdb = new Tmdb(process.env.TMDB_API_KEY ?? '');
 
 try {
-  await tmdb.getMovie(1);
+  await tmdb.getMovie(0);
 } catch (error) {
   if (error instanceof NotFoundError) {
-    console.error('Movie TMDb ID #1 not found.');
+    console.error('Movie not found.');
   } else {
     throw error;
   }
 }
-
 ```
+
+HTTP 429 responses are retried up to three times. The client honors `Retry-After` and TMDb's legacy
+rate-limit reset header, with a maximum delay of 60 seconds per retry.
 
 ## Logging
 
-This package is using [`roarr`](https://www.npmjs.com/package/roarr) logger to log the program's state.
+The package uses [Roarr](https://github.com/gajus/roarr) for structured logs. Set `ROARR_LOG=true`
+to enable logging and use `roarr-cli` when human-readable output is useful.
 
-Export `ROARR_LOG=true` environment variable to enable log printing to stdout.
+## Development
 
-Use [`roarr-cli`](https://github.com/gajus/roarr-cli) program to pretty-print the logs.
+```sh
+npm ci
+npm run lint
+npm test
+npm run build
+```
 
-## Additional Helpful Info
-
-if you are on Windows and having trouble with running the tests, checkout this [thread](https://stackoverflow.com/questions/11928013/node-env-is-not-recognized-as-an-internal-or-external-command-operable-comman)
+Tests use Node's built-in test runner and Nock; they never require a live TMDb API key.

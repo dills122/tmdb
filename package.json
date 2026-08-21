@@ -3,59 +3,35 @@
     "name": "Dylan Steele",
     "email": "dylansteele57@gmail.com"
   },
+  "bugs": {
+    "url": "https://github.com/dills122/tmdb/issues"
+  },
   "contributors": [
     "Gajus Kuizinas",
     "Dylan Steele"
   ],
-  "ava": {
-    "files": [
-      "test/**/*"
-    ],
-    "helpers": [
-      "test/helpers/**/*"
-    ],
-    "require": [
-      "@babel/register"
-    ],
-    "sources": [
-      "src/**/*"
-    ]
-  },
   "dependencies": {
-    "bluefeather": "^2.9.0",
-    "deep-map-keys": "^2.0.1",
-    "es6-error": "^4.1.1",
-    "got": "^10.0.4",
-    "lodash": "^4.17.15",
-    "qs": "^6.9.1",
-    "roarr": "^2.14.6"
+    "lodash": "^4.18.1",
+    "roarr": "^7.21.7"
   },
   "description": "TMDb SDK.",
   "devDependencies": {
-    "@babel/cli": "^7.7.5",
-    "@babel/core": "^7.7.5",
-    "@babel/node": "^7.7.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
-    "@babel/plugin-transform-flow-comments": "^7.7.4",
-    "@babel/plugin-transform-flow-strip-types": "^7.7.4",
-    "@babel/preset-env": "^7.7.6",
-    "@babel/preset-flow": "^7.7.4",
-    "@babel/register": "^7.7.4",
-    "ava": "^2.4.0",
-    "babel-plugin-istanbul": "^6.1.1",
-    "coveralls": "^3.0.9",
-    "eslint": "^6.7.2",
-    "eslint-config-canonical": "^18.1.0",
-    "flow-bin": "^0.114.0",
-    "husky": "^7.0.4",
-    "nock": "^13.2.2",
-    "nyc": "^15.1.0",
-    "semantic-release": "^19.0.2",
-    "sinon": "^13.0.0"
+    "@eslint/js": "^10.0.1",
+    "@types/lodash": "^4.17.25",
+    "@types/node": "^22.20.1",
+    "eslint": "^10.9.0",
+    "nock": "^14.0.17",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.67.0"
   },
   "engines": {
-    "node": ">=10.0"
+    "node": ">=22.13.0"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/dills122/tmdb#readme",
   "keywords": [
     "tmdb",
     "movie api",
@@ -65,31 +41,20 @@
   ],
   "main": "./dist/index.js",
   "name": "@dills1220/tmdb",
-  "nyc": {
-    "include": [
-      "src/**/*.js"
-    ],
-    "instrument": false,
-    "reporter": [
-      "text-lcov"
-    ],
-    "require": [
-      "@babel/register"
-    ],
-    "sourceMap": false
-  },
+  "packageManager": "npm@11.17.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:dills122/tmdb.git"
+    "url": "git+https://github.com/dills122/tmdb.git"
   },
   "scripts": {
-    "build": "babel ./src --out-dir ./dist --copy-files --source-maps",
-    "generate-types": "babel-node ./src/bin/generate-types.js",
-    "lint": "eslint ./src ./test && flow",
-    "lint:fix": "eslint ./src ./test --fix && flow",
-    "test": "NODE_ENV=test ava --serial --verbose",
-    "prepublishOnly": "npm run build",
-    "prepare": "husky install"
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "lint": "eslint \"src/**/*.ts\" \"test/**/*.js\" eslint.config.mjs && tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "npm run lint && npm test",
+    "test": "npm run build && npm run test:types && node --test --test-concurrency=1 test/client.test.js",
+    "test:types": "tsc --noEmit -p tsconfig.test.json"
   },
-  "version": "2.7.2"
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "version": "3.0.0"
 }
