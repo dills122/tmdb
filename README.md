@@ -1,10 +1,10 @@
 # @dills1220/tmdb
 
-[![CI](https://github.com/dills1220/tmdb/actions/workflows/ci.yml/badge.svg)](https://github.com/dills1220/tmdb/actions/workflows/ci.yml)
+[![CI](https://github.com/dills122/tmdb/actions/workflows/ci.yml/badge.svg)](https://github.com/dills122/tmdb/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@dills1220/tmdb?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
 [![npm downloads](https://img.shields.io/npm/dm/@dills1220/tmdb?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
 [![Node.js](https://img.shields.io/node/v/@dills1220/tmdb?style=flat-square)](https://www.npmjs.com/package/@dills1220/tmdb)
-[![MIT license](https://img.shields.io/github/license/dills1220/tmdb?style=flat-square)](./LICENSE)
+[![MIT license](https://img.shields.io/github/license/dills122/tmdb?style=flat-square)](./LICENSE)
 
 A small, typed Node.js SDK for [The Movie Database](https://www.themoviedb.org/) (TMDb) v3 API.
 It provides focused helpers for common movie, person, company, image, video, and credit lookups,
