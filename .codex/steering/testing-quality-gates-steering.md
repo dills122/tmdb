@@ -16,9 +16,9 @@ boundary.
 Run the smallest relevant check first, followed by the complete local gates when dependencies are
 available:
 
-- Lint and TypeScript typecheck: `npm run lint`
-- Unit tests: `npm test`
-- Build: `npm run build`
+- Lint and TypeScript typecheck: `pnpm run lint`
+- Unit tests: `pnpm test`
+- Build: `pnpm run build`
 
 There is no separate integration-test command. If a gate cannot run locally, document why and the
 remaining risk.
@@ -28,4 +28,4 @@ remaining risk.
 - No known failing tests introduced by the change.
 - No unrelated formatting or generated `dist/` churn.
 - Public exports, TypeScript declarations, and README examples updated when behavior changes.
-- `package.json` and `package-lock.json` remain synchronized for dependency changes.
+- `package.json` and `pnpm-lock.yaml` remain synchronized for dependency changes.

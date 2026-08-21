@@ -3,9 +3,6 @@
     "name": "Dylan Steele",
     "email": "dylansteele57@gmail.com"
   },
-  "bugs": {
-    "url": "https://github.com/dills122/tmdb/issues"
-  },
   "contributors": [
     "Gajus Kuizinas",
     "Dylan Steele"
@@ -14,7 +11,7 @@
     "lodash": "^4.18.1",
     "roarr": "^7.21.7"
   },
-  "description": "TMDb SDK.",
+  "description": "Typed Node.js SDK for The Movie Database (TMDb) v3 API.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/lodash": "^4.17.25",
@@ -34,24 +31,30 @@
   "homepage": "https://github.com/dills122/tmdb#readme",
   "keywords": [
     "tmdb",
-    "movie api",
-    "movie data",
-    "stars",
-    "the movie db"
+    "the-movie-database",
+    "movie",
+    "api",
+    "sdk",
+    "typescript"
   ],
+  "license": "MIT",
   "main": "./dist/index.js",
   "name": "@dills1220/tmdb",
-  "packageManager": "npm@11.17.0",
+  "packageManager": "pnpm@10.34.5",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dills122/tmdb.git"
   },
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "build": "pnpm run clean && tsc -p tsconfig.build.json",
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
     "lint": "eslint \"src/**/*.ts\" \"test/**/*.js\" eslint.config.mjs && tsc --noEmit -p tsconfig.json",
-    "prepublishOnly": "npm run lint && npm test",
-    "test": "npm run build && npm run test:types && node --test --test-concurrency=1 test/client.test.js",
+    "prepublishOnly": "pnpm run lint && pnpm test",
+    "test": "pnpm run build && pnpm run test:types && node --test --test-concurrency=1 test/client.test.js",
     "test:types": "tsc --noEmit -p tsconfig.test.json"
   },
   "type": "commonjs",

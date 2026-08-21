@@ -14,7 +14,7 @@ Core priorities:
 - compatibility for existing downstream consumers
 - deterministic request, response-mapping, throttling, and error behavior
 - stable typed contracts and intentional package exports
-- maintainable npm-based local workflows
+- maintainable pnpm-based local workflows
 
 ## Active Boundaries
 
