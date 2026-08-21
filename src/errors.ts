@@ -1,38 +1,35 @@
-// @flow
+export class TmdbError extends Error {
+  public constructor(message = '') {
+    super(message);
 
-import ExtendableError from 'es6-error';
-
-export class TmdbError extends ExtendableError {
-
+    this.name = new.target.name;
+  }
 }
 
 export class Unimplemented extends TmdbError {
-  constructor () {
+  public constructor() {
     super('Method/ behaviour is not implemented.');
   }
 }
 
 export class UnexpectedResponseError extends TmdbError {
-  constructor () {
+  public constructor() {
     super('Remote service produced an unexpected response.');
   }
 }
 
 export class NotFoundError extends TmdbError {
-  constructor () {
+  public constructor() {
     super('Resource not found.');
   }
 }
 
 export class RemoteError extends TmdbError {
-  code: number;
+  public code: number;
 
-  message: string;
-
-  constructor (message: string, code: number) {
-    super();
+  public constructor(message: string, code: number) {
+    super(message);
 
     this.code = code;
-    this.message = message;
   }
 }

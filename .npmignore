@@ -2,3 +2,6 @@ test
 coverage
 .*
 *.log
+AGENTS.md
+eslint.config.mjs
+tsconfig*.json
