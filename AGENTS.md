@@ -37,7 +37,7 @@ contracts. Do not edit generated `dist/` output directly.
 
 ## Repository Conventions
 
-- This is an npm project with a committed `package-lock.json`; use npm consistently.
+- This is a pnpm project with a committed `pnpm-lock.yaml`; use pnpm consistently.
 - Source is strict TypeScript compiled to explicit CommonJS output with declaration maps.
 - Follow the existing ESLint configuration and single-quote style.
 - Use Node's built-in test runner and Nock for deterministic TMDb HTTP tests; do not require a live
@@ -46,10 +46,10 @@ contracts. Do not edit generated `dist/` output directly.
 
 ## Useful Commands
 
-- Install dependencies: `npm ci`
-- Lint and typecheck: `npm run lint`
-- Test: `npm test`
-- Build: `npm run build`
+- Install dependencies: `pnpm install --frozen-lockfile`
+- Lint and typecheck: `pnpm run lint`
+- Test: `pnpm test`
+- Build: `pnpm run build`
 
 ## Branch And PR Metadata
 
