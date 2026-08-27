@@ -16,7 +16,7 @@
     "@eslint/js": "^10.0.1",
     "@types/lodash": "^4.17.25",
     "@types/node": "^22.20.1",
-    "eslint": "^10.9.0",
+    "eslint": "^10.9.1",
     "nock": "^14.0.17",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.67.0"
