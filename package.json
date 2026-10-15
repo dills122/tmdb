@@ -14,7 +14,7 @@
   "description": "Typed Node.js SDK for The Movie Database (TMDb) v3 API.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/lodash": "^4.17.25",
+    "@types/lodash": "^4.17.26",
     "@types/node": "^22.20.1",
     "eslint": "^10.9.0",
     "nock": "^14.0.17",
